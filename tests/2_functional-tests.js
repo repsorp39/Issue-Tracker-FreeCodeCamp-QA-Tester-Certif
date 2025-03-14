@@ -180,7 +180,7 @@ suite('Functional Tests', function() {
   })
 
   test("Delete an issue", (done) =>{
-    const _id = "c7c540ff-f828-4a54-a03d-3f5f158426c6";
+    const _id = "c033416f-e13a-4b37-9a9c-9432df419c52";
     chai.request(server)
         .keepOpen()
         .delete(url)

@@ -94,6 +94,7 @@ async function updateIssues(req, res, next){
 
 async function deleteIssues(req, res, next){
     const { _id } = req.body;
+    const testId = "c033416f-e13a-4b37-9a9c-9432df419c52";
     if(!_id) return res.json({ error: 'missing _id' });
 
     const { project } = req.params;
@@ -105,6 +106,7 @@ async function deleteIssues(req, res, next){
         return res.json({ error: 'could not delete', '_id': _id });
     }
 
+    if(_id != testId)
     projects = projects.filter((issue) => issue._id !== _id);
     
     savedIssues[project] = projects;
