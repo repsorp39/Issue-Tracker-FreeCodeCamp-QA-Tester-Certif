@@ -1,27 +1,21 @@
 'use strict';
+const express = require("express");
+const { 
+  addNewIssues,
+  getAllIssues,
+  updateIssues,
+  deleteIssues
+} = require("../controllers");
+const router = express.Router();
 
-module.exports = function (app) {
+router.route("/:project")
+  .get(getAllIssues)
 
-  app.route('/api/issues/:project')
-  
-    .get(function (req, res){
-      let project = req.params.project;
-      
-    })
-    
-    .post(function (req, res){
-      let project = req.params.project;
-      
-    })
-    
-    .put(function (req, res){
-      let project = req.params.project;
-      
-    })
-    
-    .delete(function (req, res){
-      let project = req.params.project;
-      
-    });
-    
-};
+  .post(addNewIssues)
+
+  .put(updateIssues)
+
+  .delete(deleteIssues);
+ 
+
+module.exports = router;
