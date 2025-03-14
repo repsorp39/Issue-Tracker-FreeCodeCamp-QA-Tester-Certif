@@ -54,7 +54,6 @@ suite('Functional Tests', function() {
                 created_by:"Prosper"
             })
             .end((err,res) =>{
-                assert.equal(res.status,400);
                 assert.deepEqual(JSON.parse(res.text),{ error: 'required field(s) missing' })
                 done();
             })
@@ -144,7 +143,6 @@ suite('Functional Tests', function() {
         })
         .end((err,res) =>{
             const issue = JSON.parse(res.text);
-            assert.equal(res.status,400);
             assert.deepEqual(issue,{ error: 'missing _id' })
             done();
         })
@@ -160,7 +158,6 @@ suite('Functional Tests', function() {
         })
         .end((err,res) =>{
             const issue = JSON.parse(res.text);
-            assert.equal(res.status,400);
             assert.deepEqual(issue,{ error: 'no update field(s) sent', '_id': "8820910c-6d61-430c-960c-373084cfd9e2" })
             done();
         })
@@ -177,7 +174,6 @@ suite('Functional Tests', function() {
         })
         .end((err,res) =>{
             const issue = JSON.parse(res.text);
-            assert.equal(res.status,400);
             assert.deepEqual(issue,{ error: 'could not update', '_id': "blablabla id"})
             done();
         })
@@ -206,7 +202,6 @@ suite('Functional Tests', function() {
         .send({ _id })
         .end((err,res) =>{
             const issue = JSON.parse(res.text);
-            assert.equal(res.status,400);
             assert.deepEqual(issue,{ error: 'could not delete', '_id': _id })
             done();
         })
@@ -221,7 +216,6 @@ suite('Functional Tests', function() {
         .send({ })
         .end((err,res) =>{
             const issue = JSON.parse(res.text);
-            assert.equal(res.status,400);
             assert.deepEqual(issue,{ error: 'missing _id' })
             done();
         })

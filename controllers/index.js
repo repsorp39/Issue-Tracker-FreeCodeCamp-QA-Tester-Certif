@@ -24,7 +24,7 @@ async function addNewIssues(req, res, next){
     } = req.body;
 
     if(!issue_text || !issue_title || !created_by ) 
-        return res.status(400).json({ error: 'required field(s) missing' });
+        return res.json({ error: 'required field(s) missing' });
 
     const time = new Date;
     const data = {
@@ -34,7 +34,7 @@ async function addNewIssues(req, res, next){
         created_by,
         assigned_to,
         status_text,
-        open:false,
+        open:true,
         created_on:time,
         updated_on:time
     };
@@ -66,10 +66,10 @@ async function getAllIssues(req, res, next){
 
 async function updateIssues(req, res, next){
     const { _id } = req.body;
-    if(!_id) return res.status(400).json({ error: 'missing _id' });
+    if(!_id) return res.json({ error: 'missing _id' });
 
     if(Object.keys(req.body).length === 1){
-        return res.status(400).json({ error: 'no update field(s) sent', '_id': _id })
+        return res.json({ error: 'no update field(s) sent', '_id': _id })
     }
 
     const { project } = req.params;
@@ -80,7 +80,7 @@ async function updateIssues(req, res, next){
     const index = projects.findIndex((issue) => issue._id === _id);
 
     if(index === -1){
-        return res.status(400).json({ error: 'could not update', '_id': _id });
+        return res.json({ error: 'could not update', '_id': _id });
     }
 
     projects[index] = { ...projects[index], ...req.body, updated_on:new Date };
@@ -94,7 +94,7 @@ async function updateIssues(req, res, next){
 
 async function deleteIssues(req, res, next){
     const { _id } = req.body;
-    if(!_id) return res.status(400).json({ error: 'missing _id' });
+    if(!_id) return res.json({ error: 'missing _id' });
 
     const { project } = req.params;
     const savedIssues = await getData();
@@ -102,7 +102,7 @@ async function deleteIssues(req, res, next){
 
     const index = projects.findIndex((issue) => issue._id === _id);
     if(index === -1){
-        return res.status(400).json({ error: 'could not delete', '_id': _id });
+        return res.json({ error: 'could not delete', '_id': _id });
     }
 
     projects = projects.filter((issue) => issue._id !== _id);
